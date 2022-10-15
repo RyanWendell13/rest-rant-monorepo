@@ -69,6 +69,7 @@ router.put('/:placeId', async (req, res) => {
 })
 
 router.delete('/:placeId', async (req, res) => {
+    console.log(req.currentUser?.role)
     if(req.currentUser?.role !== 'admin'){
         return res.status(403).json({ message: 'You are not allowed to delete places'})
     }
@@ -122,7 +123,6 @@ router.post('/:placeId/comments', async (req, res) => {
 router.delete('/:placeId/comments/:commentId', async (req, res) => {
     let placeId = Number(req.params.placeId)
     let commentId = Number(req.params.commentId)
-    
 
     if (isNaN(placeId)) {
         res.status(404).json({ message: `Invalid id "${placeId}"` })
